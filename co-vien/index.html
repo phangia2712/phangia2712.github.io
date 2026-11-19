@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chúc cô Viên 20/11 vui vẻ!!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Mali:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="cover" class="cover">
+  <img src="assets/sun.svg" alt="">
+  <p>Có một lời chúc dành cho cô Viên</p>
+  <button id="open" class="btn">Mở thiệp</button>
+</div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<img class="deco d1" src="assets/flower.svg" alt="">
+<img class="deco d2" src="assets/sun.svg" alt="">
+<img class="deco d3" src="assets/flower.svg" alt="">
+
+<main class="card">
+  <p class="tape">SHOULD SMILE MORE!</p>
+  <h1>Chúc cô Viên<span class="badge">20/11 vui vẻ</span></h1>
+  <p class="msg">Mong cô có một ngày tràn đầy tình yêu và nụ cười!!!</p>
+
+  <button id="gift" class="gift" aria-label="Chạm để mở quà">
+    <img class="lid" src="assets/gift-lid.svg" alt="">
+    <img class="box" src="assets/gift-box.svg" alt="">
+  </button>
+  <p id="hint" class="hint">Chạm vào hộp quà nhé cô ơi</p>
+
+  <div id="reveal" class="reveal" hidden>
+    <p>Cô ơi, chọn nước tại đây nhé!</p>
+    <a class="btn" href="https://shopeefood.vn/ho-chi-minh/katinat-tran-quang-khai" target="_blank" rel="noopener">Chọn nước cho cô</a>
+  </div>
+</main>
+
+<button id="music" class="music" aria-pressed="false">♪ Phát nhạc</button>
+<audio id="audio" src="assets/mon-qua-tang-co.mp3" loop autoplay preload="auto"></audio>
+<script src="script.js"></script>
+</body>
+</html>
