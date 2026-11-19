@@ -41,7 +41,7 @@
     for (let i = 0; i < 70; i++) parts.push(spawn(true));
   });
 
-  // Nhạc: tự phát khi load, lặp mãi. Dùng assets/mon-qua-tang-co.mp3, không có file thì phát giai điệu WebAudio
+  // Nhạc: tự phát khi load, lặp mãi. Dùng assets/music.mp3, không có file thì phát giai điệu WebAudio
   const btn = document.getElementById('music'), audio = document.getElementById('audio');
   audio.loop = true;
   let on = false, userPaused = false, timer, ac;
@@ -59,26 +59,27 @@
     }, 450);
   };
   const set = (v) => { on = v; btn.setAttribute('aria-pressed', v); btn.textContent = v ? '♪ Tắt nhạc' : '♪ Phát nhạc'; };
-  const start = (byUser) => audio.play().then(() => set(true)).catch(() => {
-    if (byUser) { synth(); set(true); } else arm();
+  const start = () => audio.play().then(() => set(true)).catch((e) => {
+    if (e && e.name === 'NotAllowedError') arm();   // bị chặn autoplay: chờ lần bấm thật
+    else { synth(); set(true); }                    // không tải được file mp3: phát giai điệu dự phòng
   });
   // Trình duyệt chặn tự phát tiếng: chờ lần chạm/bấm phím đầu tiên rồi phát
-  const evs = ['pointerdown', 'keydown', 'touchstart'];
+  const evs = ['click', 'keydown', 'touchend'];
   function arm() {
     const h = (e) => {
       if (btn.contains(e.target)) return;
       evs.forEach(n => removeEventListener(n, h));
-      if (!on && !userPaused) start(true);
+      if (!on && !userPaused) start();
     };
     evs.forEach(n => addEventListener(n, h));
   }
   btn.addEventListener('click', () => {
     if (on) { audio.pause(); clearInterval(timer); userPaused = true; return set(false); }
-    userPaused = false; start(true);
+    userPaused = false; start();
   });
-  start(false);
+  start();
   document.getElementById('open').addEventListener('click', () => {
     document.body.classList.add('opened');
-    if (!on && !userPaused) start(true);
+    if (!on && !userPaused) start();
   });
 })();
